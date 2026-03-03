@@ -2,60 +2,89 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+<p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This project is a NestJS application designed to provide a robust backend solution with the following features:
 
-## Project setup
+### Features
 
-```bash
-$ yarn install
-```
+- **Authentication & Authorization**
+  - JWT-based authentication with access and refresh tokens
+  - Role-based access control (RBAC)
+  - Permission-based authorization system
+  - User management with secure password handling
 
-## Compile and run the project
+- **Modular Architecture**
+  - Organized module structure for scalability
+  - Feature modules with clear separation of concerns
+  - Global modules for shared functionality
 
-```bash
-# development
-$ yarn run start
+- **Database Integration**
+  - TypeORM integration with PostgreSQL/MySQL support
+  - Entity relationships and migrations
+  - Database seeding system for initial data
 
-# watch mode
-$ yarn run start:dev
+- **Security & Validation**
+  - Input validation with class-validator
+  - Custom decorators for validation and transformation
+  - Protected controller endpoints
+  - Exception filtering and logging
 
-# production mode
-$ yarn run start:prod
-```
+- **Developer Experience**
+  - Custom decorators for common operations
+  - Base classes for entities and query parameters
+  - Pagination utilities
+  - Comprehensive logging and error handling
+  - Code organization following NestJS best practices
 
-## Run tests
+## Project Setup
 
-```bash
-# unit tests
-$ yarn run test
+To set up the project, follow these steps:
 
-# e2e tests
-$ yarn run test:e2e
+1. Clone the repository:
 
-# test coverage
-$ yarn run test:cov
-```
+   ```bash
+   git clone <repository-url>
+   cd nest-base
+   ```
+
+2. Install the dependencies:
+
+   ```bash
+   yarn install
+   ```
+
+3. Configure environment variables:
+   - Create a `.env` file in the root directory
+   - Add necessary configuration (database, JWT secrets, etc.)
+
+4. Seed the database (optional):
+   ```bash
+   yarn run seed
+   ```
+
+## Compile and Run the Project
+
+You can run the project in different modes:
+
+- **Development Mode**:
+
+  ```bash
+  yarn run start
+  ```
+
+- **Watch Mode** (auto-restarts on file changes):
+
+  ```bash
+  yarn run start:dev
+  ```
+
+- **Production Mode**:
+  ```bash
+  yarn run start:prod
+  ```
 
 ## Deployment
 
