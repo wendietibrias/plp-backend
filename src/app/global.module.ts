@@ -1,3 +1,4 @@
+import { CorsConfig } from '@/config/cors.config';
 import { Global, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
@@ -16,7 +17,7 @@ import { DatabaseModule } from './database.module';
       isGlobal: true,
       cache: true,
       expandVariables: true,
-      load: [AppConfig, JwtRefreshConfig, JwtConfig, OrmConfig],
+      load: [AppConfig, JwtRefreshConfig, JwtConfig, OrmConfig, CorsConfig],
     }),
     PassportModule.register({ defaultStrategy: 'jwt', session: true }),
     JwtModule.registerAsync({
