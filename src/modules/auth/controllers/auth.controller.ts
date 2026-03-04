@@ -73,10 +73,14 @@ export class AuthController {
   private setCookies(res: Response, access: string, refresh: string) {
     res.cookie('refresh_token', refresh, {
       httpOnly: true,
+      secure: true,
+      signed: true,
       expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
     });
     res.cookie('access_token', access, {
       httpOnly: true,
+      secure: true,
+      signed: true,
       expires: new Date(Date.now() + 60 * 60 * 1000),
     });
   }
