@@ -1,5 +1,13 @@
 import { CurrentUser } from '@/commons/decorators/current-user.decorator';
-import { Body, Controller, Patch, Post, Res, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Patch,
+  Post,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import type { Response } from 'express';
 import { LoginDto } from '../dtos/auth.dto';
 import { User } from '../entities/user.entity';
@@ -49,6 +57,17 @@ export class AuthController {
     res.status(200).json({
       message: 'Logout berhasil',
     });
+  }
+
+  @Get('me')
+  @UseGuards(JwtAuthGuard)
+  async me(@CurrentUser() user: User) {
+    const me = await this.authService.me(user);
+
+    return {
+      message: 'Berhasil mendapatkan data pengguna',
+      data: me,
+    };
   }
 
   private setCookies(res: Response, access: string, refresh: string) {

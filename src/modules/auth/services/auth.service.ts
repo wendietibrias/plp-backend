@@ -15,12 +15,20 @@ export class AuthService {
   ) {}
 
   async login(loginDto: LoginDto) {
-    const foundUser = await this.usersService.findByUsername(loginDto.username);
+    const foundComparableUser = await this.usersService.findByUsername(
+      loginDto.username,
+    );
 
-    if (!foundUser) throw new BadRequestException('Username tidak ditemukan');
+    console.log(foundComparableUser);
 
-    if (!foundUser.comparePassword(loginDto.password))
+    if (!foundComparableUser)
+      throw new BadRequestException('Username tidak ditemukan');
+
+    if (!(await foundComparableUser.comparePassword(loginDto.password)))
       throw new BadRequestException('Password salah');
+
+    const foundUser = (await this.usersService.findOne(foundComparableUser.id))
+      .data;
 
     const payload: JwtPayload = {
       sub: foundUser.id,
@@ -46,6 +54,12 @@ export class AuthService {
       access: this.generateAccessToken(payload),
       refresh: this.generateRefreshToken(payload),
     };
+  }
+
+  async me(user: User) {
+    const foundUser = (await this.usersService.findOne(user.id)).data;
+
+    return foundUser;
   }
 
   generateAccessToken(payload: JwtPayload) {
