@@ -19,8 +19,6 @@ export class AuthService {
       loginDto.username,
     );
 
-    console.log(foundComparableUser);
-
     if (!foundComparableUser)
       throw new BadRequestException('Username tidak ditemukan');
 
