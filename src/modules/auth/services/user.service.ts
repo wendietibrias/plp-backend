@@ -87,6 +87,10 @@ export class UserService {
           permissions: true,
         },
       },
+      select: {
+        id: true,
+        password: true,
+      },
     });
 
     return foundUser;
