@@ -43,7 +43,7 @@ async function bootstrap() {
       extended: true,
     }),
   );
-  app.use(cookieParser());
+  app.use(cookieParser(appConfig.app.cookieSecret));
   app.enableVersioning({
     type: VersioningType.URI,
   });

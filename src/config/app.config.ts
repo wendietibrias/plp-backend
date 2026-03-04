@@ -6,6 +6,7 @@ export interface AppConfig {
   url: string;
   port: number;
   lang: string;
+  cookieSecret: string;
   isLogging: boolean;
 }
 
@@ -17,6 +18,7 @@ export const AppConfig = registerAs(
     url: process.env.APP_URL || 'http://localhost',
     port: parseInt(process?.env?.PORT || '3000', 10),
     lang: process.env.APP_LANG || 'en',
+    cookieSecret: process.env.COOKIE_SECRET || 'default_cookie_secret',
     isLogging: process.env.APP_LOGGING === 'true' || false,
   }),
 );
