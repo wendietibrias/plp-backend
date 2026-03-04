@@ -48,11 +48,14 @@ export class UserSeederService implements BaseSeeder {
                 continue;
               }
             }
+
             // Create the user entity
             const userEntity = this.userRepository.create({
               ...userInfo,
               roleId: role?.id,
             });
+
+            await userEntity.hashPassword();
 
             // Save the user entity to the database
             await transactionalEntityManager.upsert(User, userEntity, [
