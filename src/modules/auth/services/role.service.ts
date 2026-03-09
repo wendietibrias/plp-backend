@@ -59,6 +59,7 @@ export class RoleService {
       where: { id },
       relations: {
         permissions: true,
+        users: true,
       },
     });
 
