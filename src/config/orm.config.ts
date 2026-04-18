@@ -5,11 +5,11 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 export const OrmConfig = registerAs(
   'OrmConfig',
   (): TypeOrmModuleOptions => ({
-    type: (process.env.DB_TYPE as any) || 'postgres',
+    type: (process.env.DB_TYPE as any) || 'mysql',
     host: process.env.DB_HOST || 'localhost',
-    port: parseInt(process?.env?.DB_PORT || '5432', 10),
-    username: process.env.DB_USERNAME || 'postgres',
-    password: process.env.DB_PASSWORD || 'postgres',
+    port: parseInt(process?.env?.DB_PORT || '3306', 10),
+    username: process.env.DB_USERNAME || 'root',
+    password: process.env.DB_PASSWORD || 'Wendi#123',
     database: process.env.DB_DATABASE || 'myapp',
     synchronize: process.env.DB_SYNCHRONIZE === 'true' || false,
     entities: [__dirname + '/../**/*.entity{.ts,.js}'],

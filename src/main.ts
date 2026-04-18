@@ -7,6 +7,7 @@ import { AppModule } from './app/app.module';
 import { ExceptionLoggingFilter } from './commons/filters/exception-logging.filter';
 import { LoggingInterceptor } from './commons/interceptors/logging.interceptor';
 import { AppConfigService } from './config/services/app.config.service';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 /**
  * Configuration Initialization
@@ -26,6 +27,26 @@ async function bootstrap() {
   const appConfig = app.get(AppConfigService);
   const cors = appConfig.cors;
   const { url, port, name } = appConfig.app;
+
+  const config = new DocumentBuilder()
+    .setTitle('Endpoint Documentation')
+    .setDescription('Ini adalah dokumentasi api untuk backend aplikasi absensi kampus')
+    .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'JWT',
+        description: 'Enter JWT token',
+        in: 'header',
+      },
+      'JWT-auth', // This name must match the one used in @ApiBearerAuth()
+    )
+    .build();
+
+  const documentFactory = () => SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, documentFactory);
 
   app.enableCors(cors);
 
