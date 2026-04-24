@@ -40,6 +40,8 @@ export class AuthService {
     };
   }
 
+  async register(){}
+
   async refreshToken(user: User) {
     const foundUser = (await this.usersService.findOne(user.id)).data;
 
