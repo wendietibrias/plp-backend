@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne, JoinColumn } from 'typeorm';
 import { BaseModel } from '../../../commons/class/base-entity-model';
 import { Course } from './course.entity';
+import { Semester } from './semester.entity';
 
 export enum DayOfWeek {
   MONDAY = 'monday',
