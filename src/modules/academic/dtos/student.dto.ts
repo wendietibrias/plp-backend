@@ -12,10 +12,12 @@ import {
   Min,
   Max,
 } from 'class-validator';
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
 import { MahasiswaStatus } from '../entities/student.entity'
+import { BaseQueryParams } from '../../../commons/class/base-query-params';
+import { Type } from 'class-transformer';
 
-export class CreateMahasiswaDto {
+export class CreateStudentDto {
   @ApiProperty({ description: 'ID Program Studi', example: 1 })
   @IsNumber()
   @IsNotEmpty()
@@ -31,19 +33,19 @@ export class CreateMahasiswaDto {
   @IsNumber()
   userId?: number;
 
-  @ApiProperty({ description: 'Nomor Induk Mahasiswa', example: '2021001001' })
+  @ApiProperty({ description: 'Nomor Induk Student', example: '2021001001' })
   @IsString()
   @IsNotEmpty()
   @Length(5, 20)
   nim: string;
 
-  @ApiProperty({ description: 'Nama lengkap mahasiswa', example: 'Budi Santoso' })
+  @ApiProperty({ description: 'Nama lengkap Student', example: 'Budi Santoso' })
   @IsString()
   @IsNotEmpty()
   @Length(3, 100)
   name: string;
 
-  @ApiProperty({ description: 'Email mahasiswa', example: 'budi@email.com' })
+  @ApiProperty({ description: 'Email Student', example: 'budi@email.com' })
   @IsEmail({}, { message: 'Format email tidak valid' })
   @IsNotEmpty()
   email: string;
@@ -75,7 +77,7 @@ export class CreateMahasiswaDto {
   @IsString()
   gender?: string;
 
-  @ApiPropertyOptional({ description: 'Status mahasiswa', enum: MahasiswaStatus, default: MahasiswaStatus.AKTIF })
+  @ApiPropertyOptional({ description: 'Status Student', enum: MahasiswaStatus, default: MahasiswaStatus.AKTIF })
   @IsOptional()
   @IsEnum(MahasiswaStatus, { message: 'Status tidak valid' })
   status?: MahasiswaStatus;
@@ -86,3 +88,31 @@ export class CreateMahasiswaDto {
   @Max(2100)
   angkatan: number;
 }
+
+
+export class FilterStudentDto extends BaseQueryParams {
+  @ApiPropertyOptional({ description: 'Filter by status', enum: MahasiswaStatus })
+  @IsOptional()
+  @IsEnum(MahasiswaStatus)
+  status?: MahasiswaStatus;
+
+  @ApiPropertyOptional({ description: 'Filter by program studi ID' })
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  programStudiId?: number;
+
+  @ApiPropertyOptional({ description: 'Filter by kelas ID' })
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  kelasId?: number;
+
+  @ApiPropertyOptional({ description: 'Filter by angkatan', example: 2021 })
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  angkatan?: number;
+}
+
+export class UpdateMStudentDto extends PartialType(CreateStudentDto) {}

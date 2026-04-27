@@ -1,9 +1,8 @@
 import { Column, Entity, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
-import { User } from '../../users/entities/user.entity';
-import { ProgramStudi } from '../../program-studi/entities/program-studi.entity';
-import { Kelas } from '../../kelas/entities/kelas.entity';
 import { StudyProgram } from '@/modules/admin/master-data/study-program.entity';
 import { BaseModel } from '@/commons/class/base-entity-model';
+import { User } from '../../auth/entities/user.entity';
+import { StudyClass } from '../../admin/master-data/entities/study-class.entity';
  
 export enum MahasiswaStatus {
   AKTIF = 'aktif',
@@ -13,7 +12,7 @@ export enum MahasiswaStatus {
   MANGKIR = 'mangkir',
 }
  
-@Entity('mahasiswa')
+@Entity('student')
 export class Student extends BaseModel {
   @OneToOne(() => User, { nullable: true, eager: true })
   @JoinColumn({ name: 'user_id' })
@@ -22,16 +21,16 @@ export class Student extends BaseModel {
   @Column({ name: 'user_id', nullable: true })
   userId?: number;
  
-  @ManyToOne(() => ProgramStudi, { nullable: false, eager: true })
+  @ManyToOne(() => StudyProgram, { nullable: false, eager: true })
   @JoinColumn({ name: 'program_studi_id' })
   studyProgram: StudyProgram;
  
   @Column({ name: 'program_studi_id' })
   studyProgramId: number;
  
-  @ManyToOne(() => Kelas, { nullable: true, eager: true })
+  @ManyToOne(() =>StudyClass, { nullable: true, eager: true })
   @JoinColumn({ name: 'kelas_id' })
-  class?: Kelas;
+  class?: StudyClass;
  
   @Column({ name: 'kelas_id', nullable: true })
   classId?: number;
